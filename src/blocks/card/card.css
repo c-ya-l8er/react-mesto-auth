@@ -1,0 +1,15 @@
+.card {
+  position: relative;
+  max-width: 282px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.card:hover {
+  transition: 0.4s all;
+  transform: scale(1.1);
+  /*filter: sepia(1.4);*/
+}

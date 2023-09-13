@@ -1,0 +1,7 @@
+.popup__figure {
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  object-fit: cover;
+}
