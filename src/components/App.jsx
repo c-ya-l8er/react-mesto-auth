@@ -33,7 +33,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [regStatus, setRegStatus] = useState(false);
   const [email, setEmail] = useState("");
@@ -193,6 +192,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsCardDeletePopupOpen(false);
     setIsImagePopupOpen(false);
+    setIsImagePopupOpen(false);
     setSelectedCard(null);
   }
 
@@ -236,7 +236,9 @@ function App() {
           <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
         </Routes>
 
-        <Footer />
+        {loggedIn && <Footer />}
+
+        <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

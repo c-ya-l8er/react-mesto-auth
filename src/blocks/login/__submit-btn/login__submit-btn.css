@@ -1,0 +1,32 @@
+.login__submit-btn {
+  max-width: 358px;
+  height: 50px;
+  margin-top: 216px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 2px;
+  border: 0;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+
+.login__submit-btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 500px) {
+  .login__submit-btn {
+    max-height: 46px;
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

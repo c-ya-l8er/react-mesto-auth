@@ -2,8 +2,9 @@
   max-width: 880px;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: flex-start;
-  margin: 45px auto 40px;
+  margin: 45px auto 0px;
   border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
 }
 

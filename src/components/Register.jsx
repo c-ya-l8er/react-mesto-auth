@@ -33,61 +33,39 @@ const Register = () => {
 
   return (
     <div className="register">
-      <p className="register__welcome">Пожалуйста, зарегистрируйтесь.</p>
-      <form onSubmit={handleSubmit} className="register__form">
-        <label htmlFor="username">Логин:</label>
+      <h2 className="register__title">Регистрация</h2>
+      <form className="register__form" onSubmit={handleSubmit}>
         <input
-          id="username"
-          name="username"
-          type="text"
-          value={formValue.username}
           onChange={handleChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
+          value={formValue.email || ""}
+          className="register__input"
           id="email"
-          name="email"
+          minLength="2"
+          maxLength="40"
+          required
           type="email"
-          value={formValue.email}
-          onChange={handleChange}
+          name="email"
+          placeholder="Email"
         />
-        <label htmlFor="password">Пароль:</label>
         <input
-          id="password"
-          name="password"
-          type="password"
+          onChange={handleChange}
           value={formValue.password}
-          onChange={handleChange}
-        />
-        <label htmlFor="confirmPassword">Повторите пароль:</label>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
+          className="register__input"
+          id="password"
+          minLength="2"
+          maxLength="40"
+          required
           type="password"
-          value={formValue.confirmPassword}
-          onChange={handleChange}
+          name="password"
+          placeholder="Пароль"
         />
-        <label htmlFor="calGoal">Калории за день:</label>
-        <input
-          id="calGoal"
-          name="calGoal"
-          type="number"
-          value={formValue.calGoal}
-          onChange={handleChange}
-        />
-        <div className="register__button-container">
-          <button
-            type="submit"
-            onSubmit={handleSubmit}
-            className="register__link"
-          >
-            Зарегистрироваться
-          </button>
-        </div>
+        <button className="register__submit-btn" type="submit">
+          Зарегистрироваться
+        </button>
       </form>
       <div className="register__signin">
         <p>Уже зарегистрированы?</p>
-        <Link to="login" className="register__login-link">
+        <Link to="sign-in" className="register__login-link">
           Войти
         </Link>
       </div>

@@ -1,62 +1,74 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import * as auth from '../utils/auth.jsx';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as auth from "../utils/auth.jsx";
 
-const Login = ({handleLogin}) => {
+const Login = ({ handleLogin }) => {
   const [formValue, setFormValue] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     setFormValue({
       ...formValue,
-      [name]: value
+      [name]: value,
     });
-  }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formValue.email || !formValue.password){
+    if (!formValue.email || !formValue.password) {
       return;
     }
-    auth.authorize(formValue.email, formValue.password)
+    auth
+      .authorize(formValue.email, formValue.password)
       .then((data) => {
-        if (data.jwt){
-          setFormValue({email: '', password: ''});
+        if (data.jwt) {
+          setFormValue({ email: "", password: "" });
           handleLogin();
-          navigate('/', {replace: true});
+          navigate("/", { replace: true });
         }
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="login">
-      <p className="login__welcome">
-        Добро пожаловать!
-      </p>
-      <form onSubmit={handleSubmit} className="login__form">
-        <label htmlFor="username">
-          Логин:
-        </label>
-        <input required id="username" name="username" type="text" value={formValue.username} onChange={handleChange} />
-        <label htmlFor="password">
-          Пароль:
-        </label>
-        <input required id="password" name="password" type="password" value={formValue.password} onChange={handleChange} />
-        <div className="login__button-container">
-          <button type="submit" className="login__link">Войти</button>
-        </div>
+      <h2 className="login__title">Вход</h2>
+      <form className="login__form" onSubmit={handleSubmit}>
+        <input
+          onChange={handleChange}
+          value={formValue.email || ""}
+          className="login__input"
+          id="email"
+          minLength="2"
+          maxLength="40"
+          required
+          type="email"
+          name="email"
+          placeholder="Email"
+        />
+        <input
+          onChange={handleChange}
+          value={formValue.password}
+          className="login__input"
+          id="password"
+          minLength="2"
+          maxLength="40"
+          required
+          type="password"
+          name="password"
+          placeholder="Пароль"
+        />
+        <button className="login__submit-btn" type="submit">
+          Войти
+        </button>
       </form>
-      <div className="login__signup">
-        <p>Ещё не зарегистрированы?</p>
-        <Link to="/register" className="signup__link">Зарегистрироваться</Link>
-      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
