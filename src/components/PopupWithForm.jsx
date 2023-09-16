@@ -23,37 +23,43 @@ function PopupWithForm({
     return () => document.removeEventListener("keydown", handleEscClose);
   }, []);
 
-  // useEffect(() => {
-  //   const handleOverlayClose = (e) => {
-  //     if (ref.current && !ref.current.contains(e.target)) {
-  //       console.log("pam-pam");
-  //       onClose();
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleOverlayClose);
-
-  //   return () => document.removeEventListener("mousedown", handleOverlayClose);
-  // }, []);
-
-  function handleOverlayClose() {
-    const handleClick = useCallback(
-      (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-          console.log("pam-pam");
-          onClose();
-        }
+  useEffect(() => {
+    const handleOverlayClose = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        onClose();
       }
-    );
-    useEffect(() => {
-      document.addEventListener("mousedown", handleClick);
-      return (
-        () => {
-          document.removeEventListener("mousedown", handleClick);
-        },
-        [handleClick]
-      );
-    });
+    };
+    document.addEventListener("mousedown", handleOverlayClose);
+
+    return () => document.removeEventListener("mousedown", handleOverlayClose);
+  }, []);
+
+  function handleOverlayClose(evt) {
+    if (evt.target === evt.currentTarget) {
+      onClose();
+    }
   }
+
+  // function handleOverlayClose() {
+  //   const handleClick = useCallback(
+  //     (e) => {
+  //       if (ref.current && !ref.current.contains(e.target)) {
+  //         console.log("pam-pam");
+  //         onClose();
+  //       }
+  //     }
+  //   );
+
+  //   useEffect(() => {
+  //     document.addEventListener("mousedown", handleClick);
+  //     return (
+  //       () => {
+  //         document.removeEventListener("mousedown", handleClick);
+  //       },
+  //       [handleClick]
+  //     );
+  //   });
+  // }
 
   return (
     <div className={`popup popup_${name} ${isOpen ? "popup_opened" : ""}`}>

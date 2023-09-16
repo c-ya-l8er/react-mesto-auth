@@ -44,6 +44,7 @@
 @import url(./blocks/popup/__input-error/popup__input-error.css);
 @import url(./blocks/popup/__input-error/_active/popup__input-error_active.css);
 @import url(./blocks/popup/__input/_invalid/popup__input_invalid.css);
+@import url(./blocks/popup/__icon/popup__icon.css);
 @import url(./blocks/login/login.css);
 @import url(./blocks/login/__form/login__form.css);
 @import url(./blocks/login/__input/login__input.css);

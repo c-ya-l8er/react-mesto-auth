@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import api from "../utils/api.jsx";
+import * as auth from "../utils/auth.jsx";
 import Header from "./Header.jsx";
 import Main from "./Main.jsx";
 import Footer from "./Footer.jsx";
@@ -18,9 +13,8 @@ import PopupWithConfirm from "./PopupWithConfirm.jsx";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.jsx";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
-import ProtectedRoute from "./ProtectedRoute.jsx";
 import InfoTooltip from "./InfoTooltip.jsx";
-import * as auth from "../utils/auth.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -28,7 +22,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isCardDeletePopupOpen, setIsCardDeletePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -42,34 +36,63 @@ function App() {
     handleTokenCheck();
   }, []);
 
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/", { replace: true });
+      return;
+    }
+    navigate("/sign-up", { replace: true });
+  }, [loggedIn]);
+
   const handleTokenCheck = () => {
     if (localStorage.getItem("token")) {
       const jwt = localStorage.getItem("token");
-      auth.checkToken(jwt).then((res) => {
-        if (res) {
-          setEmail(res.email);
-          setLoggedIn(true);
-          navigate("/", { replace: true });
-        }
-      });
+      auth
+        .checkToken(jwt)
+        .then((data) => {
+          if (data) {
+            setLoggedIn(true);
+            setEmail(data.email);
+            navigate("/", { replace: true });
+          }
+        })
+        .catch((err) => {
+          handleRegStatusClick(false);
+          console.log(err);
+        });
     }
   };
 
-  const handleLogin = (email, password) => {
-    return auth.authorize(email, password).then((data) => {
-      if (!data.jwt) {
-        return;
-      }
-      localStorage.setItem("jwt", data.jwt);
-      setEmail(res.email);
-      setLoggedIn(true);
-    });
+  const handleLogin = ({ email, password }) => {
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          setLoggedIn(true);
+          setEmail(email);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => {
+        handleRegStatusClick(false);
+        console.log(err);
+      });
   };
 
-  const handleRegister = (email, password) => {
-    return auth.register(email, password).then(() => {
-      navigate("/sign-in", { replace: true });
-    });
+  const handleRegister = ({ email, password }) => {
+    auth
+      .register(email, password)
+      .then((data) => {
+        if (data) {
+          handleRegStatusClick(true);
+          navigate("/sign-in", { replace: true });
+        }
+      })
+      .catch((err) => {
+        handleRegStatusClick(false);
+        console.log(err);
+      });
   };
 
   const handleSignOut = () => {
@@ -113,6 +136,11 @@ function App() {
   function handleCardDeleteClick(card) {
     setIsCardDeletePopupOpen(true);
     setSelectedCard(card);
+  }
+
+  function handleRegStatusClick(data) {
+    setIsInfoTooltipPopupOpen(true);
+    setRegStatus(data);
   }
 
   function handleCardLike(card) {
@@ -194,12 +222,13 @@ function App() {
     setIsImagePopupOpen(false);
     setIsImagePopupOpen(false);
     setSelectedCard(null);
+    setIsInfoTooltipPopupOpen(false);
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header email={email} loggedIn={loggedIn} onSignOut={handleSignOut} />
+        <Header email={email} onSignOut={handleSignOut} />
 
         <Routes>
           <Route
@@ -238,7 +267,11 @@ function App() {
 
         {loggedIn && <Footer />}
 
-        <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} />
+        <InfoTooltip
+          regStatus={regStatus}
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+        />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
