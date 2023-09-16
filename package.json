@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-
+  "homepage": "https://c-ya-l8er.github.io/mesto-react-auth/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
