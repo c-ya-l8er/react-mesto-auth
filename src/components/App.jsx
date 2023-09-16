@@ -57,7 +57,6 @@ function App() {
           }
         })
         .catch((err) => {
-          handleRegStatusClick(false);
           console.log(err);
         });
     }
@@ -96,7 +95,7 @@ function App() {
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
     setLoggedIn(false);
     setEmail("");
     navigate("/sign-in", { replace: true });
