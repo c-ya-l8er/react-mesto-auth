@@ -49,10 +49,10 @@ function App() {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
-        .then((data) => {
-          if (data) {
+        .then((res) => {
+          if (res) {
             setLoggedIn(true);
-            setEmail(data.email);
+            setEmail(res.data.email);
             navigate("/", { replace: true });
           }
         })
@@ -65,9 +65,9 @@ function App() {
   const handleLogin = ({ email, password }) => {
     auth
       .authorize(email, password)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("token", res.token);
           setLoggedIn(true);
           setEmail(email);
           navigate("/", { replace: true });
