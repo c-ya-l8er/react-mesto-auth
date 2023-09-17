@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef } from "react";
+import { usePopupClose } from "../hooks/usePopupClose.jsx";
 
 function PopupWithForm({
   title,
@@ -13,57 +14,13 @@ function PopupWithForm({
 }) {
   const ref = useRef();
 
-  useEffect(() => {
-    const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleEscClose);
-    return () => document.removeEventListener("keydown", handleEscClose);
-  }, []);
-
-  useEffect(() => {
-    const handleOverlayClose = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleOverlayClose);
-
-    return () => document.removeEventListener("mousedown", handleOverlayClose);
-  }, []);
-
-  function handleOverlayClose(evt) {
-    if (evt.target === evt.currentTarget) {
-      onClose();
-    }
-  }
-
-  // function handleOverlayClose() {
-  //   const handleClick = useCallback(
-  //     (e) => {
-  //       if (ref.current && !ref.current.contains(e.target)) {
-  //         console.log("pam-pam");
-  //         onClose();
-  //       }
-  //     }
-  //   );
-
-  //   useEffect(() => {
-  //     document.addEventListener("mousedown", handleClick);
-  //     return (
-  //       () => {
-  //         document.removeEventListener("mousedown", handleClick);
-  //       },
-  //       [handleClick]
-  //     );
-  //   });
-  // }
-
   return (
     <div className={`popup popup_${name} ${isOpen ? "popup_opened" : ""}`}>
-      <div onClick={handleOverlayClose} className="popup__container" ref={ref}>
+      <div
+        onClick={usePopupClose(isOpen, onClose)}
+        className="popup__container"
+        ref={ref}
+      >
         <button
           onClick={onClose}
           className="popup__close-btn"

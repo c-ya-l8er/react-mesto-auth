@@ -1,10 +1,14 @@
 import React from "react";
 import failIcon from "../images/fail.svg";
 import successIcon from "../images/success.svg";
+import { usePopupClose } from "../hooks/usePopupClose.jsx";
 
 function InfoTooltip({ regStatus, isOpen, onClose }) {
   return (
-    <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
+    <div
+      onClick={usePopupClose(isOpen, onClose)}
+      className={`popup ${isOpen ? "popup_opened" : ""}`}
+    >
       <div className="popup__container">
         <button
           onClick={onClose}
