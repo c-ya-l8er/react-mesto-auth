@@ -13,14 +13,11 @@ function PopupWithForm({
   loadingBtnText,
 }) {
   const ref = useRef();
+  usePopupClose(isOpen, onClose);
 
   return (
     <div className={`popup popup_${name} ${isOpen ? "popup_opened" : ""}`}>
-      <div
-        onClick={usePopupClose(isOpen, onClose)}
-        className="popup__container"
-        ref={ref}
-      >
+      <div className="popup__container" ref={ref}>
         <button
           onClick={onClose}
           className="popup__close-btn"
@@ -32,7 +29,6 @@ function PopupWithForm({
           onSubmit={onSubmit}
           className={`popup__form popup__form_${name}`}
           name={`${name}_form`}
-          noValidate
         >
           {children}
           <button className="popup__submit-btn" type="submit">

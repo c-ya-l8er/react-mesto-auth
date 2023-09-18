@@ -144,73 +144,58 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
-  }
-
-  function handleCardDelete(card) {
-    setIsLoading(true);
     api
-      .removeCard(card._id)
-      .then(() => {
-        setCards(cards.filter((removedCard) => card._id !== removedCard._id));
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
-  function handleUpdateUser(data) {
-    setIsLoading(true);
-    api
-      .setUserInfo(data)
-      .then((userData) => {
-        setCurrentUser(userData);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
-  function handleUpdateAvatar(data) {
-    setIsLoading(true);
-    api
-      .setUserAvatar(data)
-      .then((avatarData) => {
-        setCurrentUser(avatarData);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
-  function handleAddPlaceSubmit(data) {
-    setIsLoading(true);
-    api
-      .setInitialCards(data)
+      .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
-        closeAllPopups();
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
+  }
+
+  function handleSubmit(request) {
+    setIsLoading(true);
+    request()
+      .then(closeAllPopups)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }
+
+  function handleCardDeleteFormSubmit(card) {
+    function makeRequest() {
+      return api
+        .removeCard(card._id)
+        .then(
+          setCards(cards.filter((removedCard) => card._id !== removedCard._id))
+        );
+    }
+    handleSubmit(makeRequest);
+  }
+
+  function handleProfileFormSubmit(inputValues) {
+    function makeRequest() {
+      return api.setUserInfo(inputValues).then(setCurrentUser);
+    }
+    handleSubmit(makeRequest);
+  }
+
+  function handleAvatarFormSubmit(inputValues) {
+    function makeRequest() {
+      return api.setUserAvatar(inputValues).then(setCurrentUser);
+    }
+    handleSubmit(makeRequest);
+  }
+
+  function handleAddPlaceFormSubmit(data) {
+    function makeRequest() {
+      return api.setInitialCards(data).then((newCard) => {
+        setCards([newCard, ...cards]);
+      });
+    }
+    handleSubmit(makeRequest);
   }
 
   function closeAllPopups() {
@@ -251,7 +236,7 @@ function App() {
                 onAddPlace={handleAddPlaceClick}
                 onCardClick={handleCardClick}
                 onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
+                onCardDelete={handleCardDeleteFormSubmit}
                 onCardDeleteClick={handleCardDeleteClick}
                 loggedIn={loggedIn}
               />
@@ -275,28 +260,28 @@ function App() {
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
+          onUpdateAvatar={handleAvatarFormSubmit}
           isLoading={isLoading}
         />
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
+          onUpdateUser={handleProfileFormSubmit}
           isLoading={isLoading}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
+          onAddPlace={handleAddPlaceFormSubmit}
           isLoading={isLoading}
         />
 
         <PopupWithConfirm
           isOpen={isCardDeletePopupOpen}
           onClose={closeAllPopups}
-          onCardDelete={handleCardDelete}
+          onCardDelete={handleCardDeleteFormSubmit}
           card={selectedCard}
           isLoading={isLoading}
         />

@@ -1,32 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.jsx";
 import PopupWithForm from "./PopupWithForm.jsx";
+import { useForm } from "../hooks/useForm.jsx";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState(currentUser.name);
-  const [description, setDescription] = useState(currentUser.about);
- 
-  useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser, isOpen]);
+  const { values, handleChange, setValues } = useForm({});
 
-  function handleChange(e) {
-    const value = e.target.value;
-    const inputName = e.target.name;
-    if (inputName == "name") {
-      setName(value);
-    } else if (inputName == "about") {
-      setDescription(value);
-    }
-  }
+  useEffect(() => {
+    setValues({ name: currentUser.name, about: currentUser.about });
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateUser({
-      name,
-      about: description,
+      name: values.name,
+      about: values.about,
     });
   }
 
@@ -43,7 +32,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
     >
       <input
         onChange={handleChange}
-        value={name || ""}
+        value={values.name || ""}
         className="popup__input popup__input_type_username"
         id="username-input"
         minLength="2"
@@ -56,7 +45,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
       <span className="popup__input-error username-input-error" />
       <input
         onChange={handleChange}
-        value={description || ""}
+        value={values.about || ""}
         className="popup__input popup__input_type_about"
         id="about-input"
         minLength="2"

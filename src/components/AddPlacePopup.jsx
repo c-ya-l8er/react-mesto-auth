@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm.jsx";
+import { useForm } from "../hooks/useForm.jsx";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
-  const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const { values, handleChange, setValues } = useForm({});
 
   useEffect(() => {
-    setName("");
-    setLink("");
+    setValues({});
   }, [isOpen]);
-
-  function handleChange(e) {
-    const value = e.target.value;
-    const inputName = e.target.name;
-    if (inputName == "name") {
-      setName(value);
-    } else if (inputName == "link") {
-      setLink(value);
-    }
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({
-      name,
-      link,
+      name: values.name,
+      link: values.link,
     });
   }
 
@@ -41,7 +30,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
     >
       <input
         onChange={handleChange}
-        value={name || ""}
+        value={values.name || ""}
         className="popup__input popup__input_type_cardname"
         id="cardname-input"
         minLength="2"
@@ -54,7 +43,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
       <span className="popup__input-error cardname-input-error" />
       <input
         onChange={handleChange}
-        value={link || ""}
+        value={values.link || ""}
         className="popup__input popup__input_type_link"
         id="link-input"
         required

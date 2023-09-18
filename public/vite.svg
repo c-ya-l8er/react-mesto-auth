@@ -1,1 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="31.88" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 257"><defs><linearGradient id="IconifyId1813088fe1fbc01fb466" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF"></stop><stop offset="100%" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="IconifyId1813088fe1fbc01fb467" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83"></stop><stop offset="8.333%" stop-color="#FFDD35"></stop><stop offset="100%" stop-color="#FFA800"></stop></linearGradient></defs><path fill="url(#IconifyId1813088fe1fbc01fb466)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z"></path><path fill="url(#IconifyId1813088fe1fbc01fb467)" d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"></path></svg>
+<?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve" width="80" height="80">
+<g>
+	<rect x="4.5" y="4.5" style="fill:#FFC49C;" width="31" height="31"/>
+	<g>
+		<path style="fill:#A16A4A;" d="M35,5v30H5V5H35 M36,4H4v32h32V4L36,4z"/>
+	</g>
+</g>
+<g>
+	<rect x="44.5" y="44.5" style="fill:#BAE0BD;" width="31" height="31"/>
+	<g>
+		<path style="fill:#5E9C76;" d="M75,45v30H45V45H75 M76,44H44v32h32V44L76,44z"/>
+	</g>
+</g>
+<g>
+	<rect x="4.5" y="44.5" style="fill:#8BB7F0;" width="31" height="31"/>
+	<g>
+		<path style="fill:#4E7AB5;" d="M35,45v30H5V45H35 M36,44H4v32h32V44L36,44z"/>
+	</g>
+</g>
+<g>
+	
+		<rect x="12.222" y="52.222" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -36.5685 31.7157)" style="fill:#FFEEA3;" width="15.556" height="15.556"/>
+</g>
+<g>
+	<rect x="12" y="52" style="fill:#FFEEA3;" width="16" height="16"/>
+</g>
+<polygon style="fill:#A16A4A;" points="26,20 20,25 28,35 35,35 35,28 "/>
+<circle style="fill:#FFFFFF;" cx="28" cy="12" r="3"/>
+<polygon style="fill:#E09367;" points="31,35 5,35 5,28 15,18 "/>
+<path style="fill:#FFFFFF;" d="M60,60l-2.913-4.855C55.728,52.881,57.359,50,60,50h0c2.641,0,4.272,2.881,2.913,5.145L60,60z"/>
+<path style="fill:#FFFFFF;" d="M60,60l2.913,4.855C64.272,67.119,62.641,70,60,70h0c-2.641,0-4.272-2.881-2.913-5.145L60,60z"/>
+<path style="fill:#FFFFFF;" d="M62,61l-7.54-1.001c-2.64,0.044-4.319-2.808-2.999-5.095l0,0c1.32-2.287,4.631-2.259,5.912,0.05  L62,61z"/>
+<path style="fill:#FFFFFF;" d="M59,59l6.54,1.001c2.64-0.044,4.319,2.808,2.999,5.095l0,0c-1.32,2.287-4.631,2.259-5.912-0.05L59,59  z"/>
+<path style="fill:#FFFFFF;" d="M62,59l-4.627,6.046c-1.282,2.309-4.592,2.337-5.912,0.05l0,0c-1.32-2.287,0.359-5.14,2.999-5.095  L62,59z"/>
+<path style="fill:#FFFFFF;" d="M58,61l4.627-6.046c1.282-2.309,4.592-2.337,5.912-0.05l0,0c1.32,2.287-0.359,5.14-2.999,5.095L58,61  z"/>
+<circle style="fill:#FFEEA3;" cx="60" cy="60" r="4"/>
+<circle style="fill:#FFFFFF;" cx="20" cy="60" r="4"/>
+<g>
+	<rect x="44.5" y="4.5" style="fill:#C2E8FF;" width="31" height="31"/>
+	<g>
+		<path style="fill:#7496C4;" d="M75,5v30H45V5H75 M76,4H44v32h32V4L76,4z"/>
+	</g>
+</g>
+<path style="fill:#FFFFFF;" d="M66,22c-0.094,0-0.172,0.047-0.264,0.053C65.24,20.894,64.341,20,63,20  c-0.409,0-0.934,0.066-1.401,0.314C60.959,18.955,59.601,18,58,18c-2.209,0-4,1.791-4,4c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4  s9.949,0,12,0c2.209,0,4-1.791,4-4C70,23.791,68.209,22,66,22z"/>
+<circle style="fill:#FFFFFF;" cx="68" cy="12" r="3"/>
+</svg>

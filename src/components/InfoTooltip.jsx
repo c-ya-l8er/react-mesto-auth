@@ -4,11 +4,10 @@ import successIcon from "../images/success.svg";
 import { usePopupClose } from "../hooks/usePopupClose.jsx";
 
 function InfoTooltip({ regStatus, isOpen, onClose }) {
+  usePopupClose(isOpen, onClose);
+
   return (
-    <div
-      onClick={usePopupClose(isOpen, onClose)}
-      className={`popup ${isOpen ? "popup_opened" : ""}`}
-    >
+    <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
       <div className="popup__container">
         <button
           onClick={onClose}
